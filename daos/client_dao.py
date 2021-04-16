@@ -55,3 +55,6 @@ class ClientDAO:
 if __name__ == '__main__':
     print(ClientDAO.get_all_clients())
     print(ClientDAO.get_client(1).accounts[0].balance)
+
+
+#inserted comment to test git import

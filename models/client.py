@@ -1,4 +1,4 @@
-from uuid import UUID
+
 class Client:
     def __init__(self, name, id=0, accounts=None):
         if accounts is None:
@@ -14,3 +14,12 @@ class Client:
     def __repr__(self):
         return str(self)
 
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name
+        }
+
+    @staticmethod
+    def deserialize(json):
+        return Client(json[1], json[0])

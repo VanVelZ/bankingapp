@@ -4,8 +4,8 @@ from daos.client_dao import ClientDAO
 class ClientService:
 
     @staticmethod
-    def create_client():
-        pass
+    def create_client(client):
+        return ClientDAO.create_client(client)
 
     @staticmethod
     def get_all_clients():

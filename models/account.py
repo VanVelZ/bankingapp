@@ -1,5 +1,3 @@
-import uuid
-
 
 class Account:
 
@@ -13,3 +11,14 @@ class Account:
 
     def __repr__(self):
         return str(self)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "accountType": self.account_type,
+            "balance": self.balance
+        }
+
+    @staticmethod
+    def deserialize(json):
+        return Account(json[1], json[0], json[2])

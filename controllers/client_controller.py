@@ -1,23 +1,26 @@
+from services.client_service import ClientService
+
 
 def route(app):
 
-    @app.route("/clients", methods=["GET"])
+    @app.route("/clients/", methods=["GET"])
     def get_all_clients():
-        return "Still need to get clients"
+        return ClientService.get_all_clients()
 
-    @app.route("/clients/<id>", methods=["GET"])
+    @app.route("/clients/<id>/", methods=["GET"])
     def get_client(id):
-        return f"Still need to get clients for {id}"
+        return ClientService.get_client(id)
 
-    @app.route("/clients", methods=["PUSH"])
+    @app.route("/clients/", methods=["POST"])
     def create_client(client):
-        return "Still need to create clients"
+        return create_client(client)
 
-    @app.route("/clients", methods=["PUT"])
-    def update_client(client):
-        return "Still need to update clients"
+    @app.route("/clients/<id>", methods=["PUT"])
+    def update_client(id):
+        #Todo: Implement getclient
+        return update_client(client)
 
-    @app.route("/clients/<id>", methods=["DELETE"])
-    def update_client(client):
-        return "Still need to delete clients"
+    @app.route("/clients/<id>/", methods=["DELETE"])
+    def delete_client(id):
+        return ClientService.delete_client(id)
 

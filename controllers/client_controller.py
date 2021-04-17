@@ -1,3 +1,6 @@
+from flask import request
+
+from models.client import Client
 from services.client_service import ClientService
 
 
@@ -13,11 +16,12 @@ def route(app):
 
     @app.route("/clients/", methods=["POST"])
     def create_client(client):
-        return create_client(client)
+        return ClientService.create_client(client)
 
     @app.route("/clients/<id>", methods=["PUT"])
     def update_client(id):
-        #Todo: Implement getclient
+        client = Client.deserialize(request.json)
+        client.id = id
         return update_client(client)
 
     @app.route("/clients/<id>/", methods=["DELETE"])

@@ -1,3 +1,4 @@
+from daos.accounts_dao import AccountsDAO
 
 
 class AccountService:
@@ -13,6 +14,10 @@ class AccountService:
     @staticmethod
     def get_account(id):
         pass
+
+    @staticmethod
+    def get_account_by_client(id):
+        return AccountsDAO.get_accounts_by_client(id)
 
     @staticmethod
     def delete_account(id):

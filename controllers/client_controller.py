@@ -1,6 +1,7 @@
 from flask import request
 
 from models.client import Client
+from services.account_service import AccountService
 from services.client_service import ClientService
 
 
@@ -28,3 +29,26 @@ def route(app):
     def delete_client(id):
         return ClientService.delete_client(id)
 
+    @app.route("/clients/<clientId>/accounts/", ["POST"])
+    def create_account(client_id):
+        return "Not implemented"
+
+    @app.route("/clients/<clientId>/accounts/", ["GET"])
+    def get_accounts(client_id):
+        return AccountService.get_account_by_client(client_id)
+
+    @app.route("/clients/<clientId>/accounts/<accountId>/", ["GET"])
+    def get_account(client_id, account_id):
+        return "Not implemented"
+
+    @app.route("/clients/<clientId>/accounts/", ["GET"])
+    def get_accounts_between(client_id, less_than, greater_than):
+        return "Not implemented"
+
+    @app.route("/clients/<clientId>/accounts/<accountId>/", ["PATCH"])
+    def edit_account_balance(client_id, account_id):
+        return "Not implemented"
+
+    @app.route("/clients/<clientId>/accounts/<accountId/transfer/<transferId>")
+    def transfer_money(client_id, account_id, transfer_id):
+        return "Not implemented"

@@ -4,16 +4,16 @@ from daos.accounts_dao import AccountsDAO
 class AccountService:
 
     @staticmethod
-    def create_account():
-        pass
+    def create_account(account):
+        return AccountsDAO.create_account(account)
 
     @staticmethod
     def get_all_accounts():
-        pass
+        return AccountsDAO.get_all_accounts()
 
     @staticmethod
     def get_account(id):
-        pass
+        return AccountsDAO.get_account(id)
 
     @staticmethod
     def get_account_by_client(id):
@@ -21,16 +21,8 @@ class AccountService:
 
     @staticmethod
     def delete_account(id):
-        pass
+        return AccountsDAO.delete_account(id)
 
     @staticmethod
     def update_account(account):
-        pass
-
-    @staticmethod
-    def withdraw(account, amount):
-        pass
-
-    @staticmethod
-    def deposit(account, amount):
-        pass
+        return AccountsDAO.update_account(account)

@@ -49,6 +49,6 @@ def route(app):
     def edit_account_balance(client_id, account_id):
         return "Not implemented"
 
-    @app.route("/clients/<clientId>/accounts/<accountId/transfer/<transferId>")
+    @app.route("/clients/<clientId>/accounts/<accountId/transfer/<transferId>", ["PATCH"])
     def transfer_money(client_id, account_id, transfer_id):
         return "Not implemented"

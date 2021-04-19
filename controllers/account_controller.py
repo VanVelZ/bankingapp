@@ -14,8 +14,8 @@ def route(app):
         return AccountService.get_account(client_id, account_id)
 
     @app.route("/clients/<clientId>/accounts/", methods=["GET"])
-    def get_accounts_between(client_id, less_than, greater_than):
-        return "Not implemented"
+    def get_accounts_between(client_id):
+        return f"{client_id}, {less_than}, {greater_than}"
 
     # @app.route("/clients/<clientId>/accounts/<accountId>/", methods=["PATCH"])
     # def edit_account_balance(client_id, account_id):

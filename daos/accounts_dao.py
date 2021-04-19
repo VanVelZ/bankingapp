@@ -44,7 +44,7 @@ class AccountsDAO:
         cursor = connection.cursor()
         cursor.execute(sql, [changing_account.id, changing_account.account_type, changing_account.balance])
         connection.commit()
-        return changing_account
+        return cursor.rowcount
 
     @staticmethod
     def delete_account(id):
@@ -52,7 +52,7 @@ class AccountsDAO:
         cursor = connection.cursor()
         cursor.execute(sql, [id])
         connection.commit()
-        return True
+        return cursor.rowcount
 
     @staticmethod
     def create_account(account):

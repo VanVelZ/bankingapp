@@ -1,4 +1,5 @@
 from daos.client_dao import ClientDAO
+from models.client import Client
 
 
 class ClientService:
@@ -16,7 +17,8 @@ class ClientService:
 
     @staticmethod
     def get_client(id):
-        return ClientDAO.get_client(id).serialize()
+        client = ClientDAO.get_client(id)
+        return client.serialize() if client else client
 
     @staticmethod
     def delete_client(id):

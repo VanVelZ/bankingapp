@@ -24,8 +24,11 @@ class ClientDAO:
         cursor = connection.cursor()
         cursor.execute(sql, [id])
         record = cursor.fetchone()
-
-        return Client(id=record[0], name=record[1], accounts=AccountsDAO.get_accounts_by_client(record[0]))
+        try:
+            client = Client(id=record[0], name=record[1], accounts=AccountsDAO.get_accounts_by_client(record[0]))
+            return client
+        except TypeError as e:
+            return False
 
     @staticmethod
     def update_client(changing_client):
@@ -33,7 +36,7 @@ class ClientDAO:
         cursor = connection.cursor()
         cursor.execute(sql, [changing_client.name, changing_client.id])
         connection.commit()
-        return changing_client
+        return cursor.rowcount
 
     @staticmethod
     def delete_client(id):

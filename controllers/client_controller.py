@@ -35,6 +35,7 @@ def route(app):
         if update_count > 0:
             return f"Good"
         else:
+            logger.log(f"Client could not be updated with an id of {id}")
             return "Client Not Found", 404
 
     @app.route("/clients/<id>/", methods=["DELETE"])
@@ -43,6 +44,7 @@ def route(app):
         if delete_count > 0:
             return f"Deleted {delete_count} items", 205
         else:
+            logger.log(f"Client could not be deleted with an id of {id}")
             return "Not Found", 404
 
 

@@ -1,7 +1,7 @@
 import logging
 
 
-def log(message, access_level):
+def log(message, access_level=10):
     logging.basicConfig(level=logging.INFO, filename='app.log', filemode='a',
-                            format='%(name)s - %(levelname)s - %(message)s')
+                        format='%(levelname)s - %(message)s')
     logging.log(access_level, message)

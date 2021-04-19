@@ -22,4 +22,4 @@ class Client:
 
     @staticmethod
     def deserialize(json):
-        return Client(json[1], json[0])
+        return Client(json["name"], json["id"])

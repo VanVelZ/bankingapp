@@ -1,4 +1,4 @@
-from flask import request
+from flask import request, jsonify
 
 from models.client import Client
 from services.account_service import AccountService
@@ -9,46 +9,36 @@ def route(app):
 
     @app.route("/clients/", methods=["GET"])
     def get_all_clients():
-        return ClientService.get_all_clients()
+        return jsonify(ClientService.get_all_clients()), 200
 
     @app.route("/clients/<id>/", methods=["GET"])
     def get_client(id):
-        return ClientService.get_client(id)
+        try:
+            return ClientService.get_client(id), 200
+        except:
+            return "Client Not Found", 404
 
     @app.route("/clients/", methods=["POST"])
-    def create_client(client):
-        return ClientService.create_client(client)
+    def create_client():
+        ClientService.create_client(Client.deserialize(request.json))
+        return "Good", 201
 
     @app.route("/clients/<id>", methods=["PUT"])
     def update_client(id):
         client = Client.deserialize(request.json)
         client.id = id
-        return update_client(client)
+        try:
+            ClientService.update_client(client)
+            return "Good"
+        except:
+            return "Client Not Found", 404
 
     @app.route("/clients/<id>/", methods=["DELETE"])
     def delete_client(id):
-        return ClientService.delete_client(id)
+        delete_count = ClientService.delete_client(id)
+        if delete_count > 0:
+            return f"Deleted {delete_count} items", 205
+        else:
+            return "Not Found", 404
 
-    @app.route("/clients/<clientId>/accounts/", ["POST"])
-    def create_account(client_id):
-        return "Not implemented"
 
-    @app.route("/clients/<clientId>/accounts/", ["GET"])
-    def get_accounts(client_id):
-        return AccountService.get_account_by_client(client_id)
-
-    @app.route("/clients/<clientId>/accounts/<accountId>/", ["GET"])
-    def get_account(client_id, account_id):
-        return "Not implemented"
-
-    @app.route("/clients/<clientId>/accounts/", ["GET"])
-    def get_accounts_between(client_id, less_than, greater_than):
-        return "Not implemented"
-
-    @app.route("/clients/<clientId>/accounts/<accountId>/", ["PATCH"])
-    def edit_account_balance(client_id, account_id):
-        return "Not implemented"
-
-    @app.route("/clients/<clientId>/accounts/<accountId/transfer/<transferId>", ["PATCH"])
-    def transfer_money(client_id, account_id, transfer_id):
-        return "Not implemented"

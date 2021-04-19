@@ -18,10 +18,10 @@ class AccountsDAO:
         return accounts
 
     @staticmethod
-    def get_account(id):
-        sql = "Select * from accounts where id = %s"
+    def get_account(client_id, account_id):
+        sql = "Select * from accounts where id = %s and client_id = %s"
         cursor = connection.cursor()
-        cursor.execute(sql, [id])
+        cursor.execute(sql, [account_id, client_id])
         record = cursor.fetchone()
         return Account(account_type=record[2], id=record[0], balance=record[3])
 

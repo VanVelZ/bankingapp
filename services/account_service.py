@@ -12,12 +12,15 @@ class AccountService:
         return AccountsDAO.get_all_accounts()
 
     @staticmethod
-    def get_account(id):
-        return AccountsDAO.get_account(id)
+    def get_account(client_id, account_id):
+        return AccountsDAO.get_account(client_id, account_id).serialize()
 
     @staticmethod
     def get_account_by_client(id):
-        return AccountsDAO.get_accounts_by_client(id)
+        accounts = []
+        for account in AccountsDAO.get_accounts_by_client(id):
+            accounts.append(account.serialize())
+        return accounts
 
     @staticmethod
     def delete_account(id):

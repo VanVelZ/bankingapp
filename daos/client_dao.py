@@ -31,7 +31,7 @@ class ClientDAO:
     def update_client(changing_client):
         sql = "Update clients set name=%s where id=%s"
         cursor = connection.cursor()
-        cursor.execute(sql, [changing_client.id, changing_client.name])
+        cursor.execute(sql, [changing_client.name, changing_client.id])
         connection.commit()
         return changing_client
 
@@ -41,7 +41,7 @@ class ClientDAO:
         cursor = connection.cursor()
         cursor.execute(sql, [id])
         connection.commit()
-        return True
+        return cursor.rowcount
 
     @staticmethod
     def create_client(client):

@@ -9,16 +9,19 @@ class ClientService:
 
     @staticmethod
     def get_all_clients():
-        pass
+        clients = []
+        for client in ClientDAO.get_all_clients():
+            clients.append(client.serialize())
+        return clients
 
     @staticmethod
     def get_client(id):
-        pass
+        return ClientDAO.get_client(id).serialize()
 
     @staticmethod
     def delete_client(id):
-        pass
+        return ClientDAO.delete_client(id)
 
     @staticmethod
     def update_client(client):
-        pass
+        return ClientDAO.update_client(client)

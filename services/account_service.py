@@ -40,7 +40,7 @@ class AccountService:
         if account:
             account.account_type = change_account.account_type
             update_count = AccountsDAO.update_account(account)
-            return (f"Updated {update_count} account", 201) if update_count else ("Account not found", 404)
+            return f"Updated {update_count} account", 201
         else:
             return "Account not found", 404
 

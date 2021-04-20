@@ -23,7 +23,7 @@ class ClientDAOTests(unittest.TestCase):
     def test_get_one(self):
         self.assertTrue(ClientDAO.get_client(ClientDAOTests.client.id))
 
-    def test_delete_client(self):
+    def test_zdelete_client(self):
         client = ClientDAO.get_all_clients().pop()
         self.assertTrue(ClientDAO.delete_client(client.id))
 

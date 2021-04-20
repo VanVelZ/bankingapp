@@ -48,6 +48,7 @@ def route(app):
         elif action == 'deposit':
             return AccountService.deposit_account(client_id, account_id, request.json["amount"])
         else:
+            logger.log(f"{request.json}")
             return """Body must contain a JSON with an action property and values of withdrawal or deposit and
                       an amount property with a valid number""", 400
 

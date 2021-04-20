@@ -27,6 +27,7 @@ class AccountsDAO:
             return Account(account_type=record[2], id=record[0], balance=record[3])
         except TypeError:
             return False
+
     @staticmethod
     def get_accounts_by_client(id):
         sql = "Select * from accounts where client_id = %s"

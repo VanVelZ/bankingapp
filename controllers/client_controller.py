@@ -25,6 +25,7 @@ def route(app):
     @app.route("/clients/", methods=["POST"])
     def create_client():
         ClientService.create_client(Client.deserialize(request.json))
+        logger.log(request.json, logging.INFO)
         return "Success!", 201
 
     @app.route("/clients/<id>", methods=["PUT"])
@@ -35,7 +36,7 @@ def route(app):
         if update_count > 0:
             return f"Successfully updated {update_count} item", 200
         else:
-            logger.log(f"Client could not be updated with an id of {id}")
+            logger.log(f"Client could not be updated with an id of {id}\n{request.json}")
             return "Client Not Found", 404
 
     @app.route("/clients/<id>/", methods=["DELETE"])

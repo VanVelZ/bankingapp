@@ -19,8 +19,7 @@ def route(app):
 
     @app.route("/clients/<client_id>/accounts/<account_id>", methods=["DELETE"])
     def delete_account(client_id, account_id):
-        update_count = AccountService.delete_account(client_id, account_id)
-        return (f"Deleted {update_count} account", 204) if update_count else ("Account not found", 404)
+        return AccountService.delete_account(client_id, account_id)
 
     @app.route("/clients/<client_id>/accounts/", methods=["GET"])
     def get_accounts(client_id):

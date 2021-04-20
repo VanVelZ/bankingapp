@@ -32,7 +32,8 @@ class AccountService:
 
     @staticmethod
     def delete_account(client_id, account_id):
-        return AccountsDAO.delete_account(client_id, account_id)
+        update_count = AccountsDAO.delete_account(client_id, account_id)
+        return (f"Deleted {update_count} account", 204) if update_count else ("Account not found", 404)
 
     @staticmethod
     def update_account(client_id, account_id, change_account):
@@ -51,7 +52,8 @@ class AccountService:
             if account.balance - amount > 0:
                 account.balance -= amount
                 AccountsDAO.update_account(account)
-                return f"{amount} has been withdrawn from {account.account_type}. Current Balance is {account.balance}"
+                return (f"{amount} has been withdrawn from {account.account_type}. "
+                        f"Current Balance is {account.balance}", 200)
             else:
                 return f"Insufficient Funds", 422
         else:
@@ -64,7 +66,8 @@ class AccountService:
             if account:
                 account.balance += amount
                 AccountsDAO.update_account(account)
-                return f"{amount} has been deposited into {account.account_type}. Current Balance is {account.balance}"
+                return (f"{amount} has been deposited into {account.account_type}. "
+                        f"Current Balance is {account.balance}", 200)
             else:
                 return "Client or Account not found", 404
         except TypeError as e:
@@ -80,7 +83,7 @@ class AccountService:
                 transfer_account.balance += amount
                 AccountsDAO.update_account(account)
                 AccountsDAO.update_account(transfer_account)
-                return f"Successfully Transferred funds"
+                return f"Successfully Transferred funds", 200
             else:
                 return "Insufficient funds", 422
         else:

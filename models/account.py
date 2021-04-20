@@ -16,7 +16,7 @@ class Account:
         return {
             "id": self.id,
             "accountType": self.account_type,
-            "balance": self.balance
+            "balance": float(self.balance)
         }
 
     @staticmethod

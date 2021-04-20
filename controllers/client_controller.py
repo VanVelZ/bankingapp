@@ -45,6 +45,6 @@ def route(app):
             return f"Deleted {delete_count} items", 204
         else:
             logger.log(f"Client could not be deleted with an id of {id}")
-            return "Not Found", 404
+            return "Client Not Found", 404
 
 

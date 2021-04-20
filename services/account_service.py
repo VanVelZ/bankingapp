@@ -47,33 +47,41 @@ class AccountService:
     @staticmethod
     def withdrawal_account(client_id, account_id, amount):
         account = AccountsDAO.get_account(client_id, account_id)
-        if account.balance - amount > 0:
-            account.balance -= amount
-            AccountsDAO.update_account(account)
-            return f"{amount} has been withdrawn from {account.account_type}. Current Balance is {account.balance}"
+        if account:
+            if account.balance - amount > 0:
+                account.balance -= amount
+                AccountsDAO.update_account(account)
+                return f"{amount} has been withdrawn from {account.account_type}. Current Balance is {account.balance}"
+            else:
+                return f"Insufficient Funds", 422
         else:
-            return f"Insufficient Funds", 422
+            return "Client or Account not found", 404
 
     @staticmethod
     def deposit_account(client_id, account_id, amount):
         try:
             account = AccountsDAO.get_account(client_id, account_id)
-            account.balance += amount
-            AccountsDAO.update_account(account)
-            return f"{amount} has been deposited into {account.account_type}. Current Balance is {account.balance}"
+            if account:
+                account.balance += amount
+                AccountsDAO.update_account(account)
+                return f"{amount} has been deposited into {account.account_type}. Current Balance is {account.balance}"
+            else:
+                return "Client or Account not found", 404
         except TypeError as e:
-            return False
+            return "There was an issue processing your request", 400
 
     @staticmethod
     def transfer_account(client_id, account_id, transfer_account_id, amount):
         account = AccountsDAO.get_account(client_id, account_id)
         transfer_account = AccountsDAO.get_account(client_id, transfer_account_id)
-
-        if account.balance - amount > 0:
-            account.balance -= amount
-            transfer_account.balance += amount
-            AccountsDAO.update_account(account)
-            AccountsDAO.update_account(transfer_account)
-            return f"Successfully Transferred funds"
+        if account and transfer_account:
+            if account.balance - amount > 0:
+                account.balance -= amount
+                transfer_account.balance += amount
+                AccountsDAO.update_account(account)
+                AccountsDAO.update_account(transfer_account)
+                return f"Successfully Transferred funds"
+            else:
+                return "Insufficient funds", 422
         else:
-            return "Insufficient funds", 422
+            return "One or both of those accounts do not exist", 404

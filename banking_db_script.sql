@@ -20,8 +20,21 @@ references clients(id);
 insert into clients values (default, 'Susan');
 insert into clients values (default, 'Patrick');
 insert into clients values (default, 'Barbara');
-insert into accounts values (default, 1, 'Checking', 0);
-insert into accounts values (default, 2, 'Savings', 200);
-insert into accounts values (default, 3, 'Checking', 0);
+insert into clients values (default, 'Stacy');
+insert into clients values (default, 'Leroy');
+insert into clients values (default, 'Tony');
+insert into clients values (default, 'Tamara');
+insert into clients values (default, 'Blake');
+insert into clients values (default, 'Jamie');
+insert into accounts values (default, 1, 'Checking', 10);
+insert into accounts values (default, 2, 'Checking', 200);
+insert into accounts values (default, 2, 'Savings', 300);
+insert into accounts values (default, 2, 'Retirement', 1000);
+insert into accounts values (default, 3, 'Checking', 110);
+insert into accounts values (default, 4, 'Checking', 222);
+insert into accounts values (default, 5, 'Checking', 3030);
+insert into accounts values (default, 6, 'Savings', 404040);
+insert into accounts values (default, 6, 'Retirement', 674536);
+insert into accounts values (default, 7, 'Checking', 100);
 
 

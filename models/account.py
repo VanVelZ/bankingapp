@@ -22,3 +22,4 @@ class Account:
     @staticmethod
     def deserialize(json):
         return Account(json["accountType"], json["id"], json["balance"])
+

@@ -25,7 +25,7 @@ def route(app):
     @app.route("/clients/", methods=["POST"])
     def create_client():
         ClientService.create_client(Client.deserialize(request.json))
-        return "Good", 201
+        return "Success!", 201
 
     @app.route("/clients/<id>", methods=["PUT"])
     def update_client(id):
@@ -33,7 +33,7 @@ def route(app):
         client.id = id
         update_count = ClientService.update_client(client)
         if update_count > 0:
-            return f"Good"
+            return f"Successfully updated {update_count} item", 200
         else:
             logger.log(f"Client could not be updated with an id of {id}")
             return "Client Not Found", 404
@@ -42,7 +42,7 @@ def route(app):
     def delete_client(id):
         delete_count = ClientService.delete_client(id)
         if delete_count > 0:
-            return f"Deleted {delete_count} items", 205
+            return f"Deleted {delete_count} items", 204
         else:
             logger.log(f"Client could not be deleted with an id of {id}")
             return "Not Found", 404

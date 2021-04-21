@@ -14,7 +14,7 @@ class AccountService:
     @staticmethod
     def get_account(client_id, account_id):
         account = AccountsDAO.get_account(client_id, account_id)
-        return account.serialize() if account else "Account/Client not found", 404
+        return account.serialize() if account else ("Account/Client not found", 404)
 
     @staticmethod
     def get_account_by_client_between(client_id, less_than, greater_than):

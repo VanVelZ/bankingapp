@@ -8,22 +8,22 @@ class ClientServiceTest(unittest.TestCase):
 
     client = Client("Test Client")
 
-    def test_insert(self):
+    def test_00_insert(self):
         self.assertTrue(ClientService.create_client(ClientServiceTest.client))
 
-    def test_get_all(self):
+    def test_01_get_all(self):
         clients = ClientService.get_all_clients()
         ClientServiceTest.client = Client.deserialize(clients.pop())
         self.assertTrue(clients)
 
-    def test_get_one(self):
+    def test_02_get_one(self):
         self.assertTrue(ClientService.get_client(ClientServiceTest.client.id))
 
-    def test_update(self):
+    def test_93_update(self):
         ClientServiceTest.client.name = "Updated Test Client"
         self.assertTrue(ClientService.update_client(ClientServiceTest.client))
 
-    def test_zdelete(self):
+    def test_94_delete(self):
         self.assertTrue(ClientService.delete_client(ClientServiceTest.client.id))
 
 

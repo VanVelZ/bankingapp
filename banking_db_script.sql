@@ -7,14 +7,14 @@ create table clients (id serial primary key,
 create table accounts (id serial primary key,
 					   client_id int not null,
 					   account_type varchar(100) not null,
-					   balance money not null check (balance >= money(0)));
-		
+					   balance float not null check (balance >= 0));
+
 alter table accounts
 add constraint fk_client
 foreign key (client_id)
 references clients(id);
 
-		
+
 
 --Default values
 insert into clients values (default, 'Susan');
@@ -36,5 +36,3 @@ insert into accounts values (default, 5, 'Checking', 3030);
 insert into accounts values (default, 6, 'Savings', 404040);
 insert into accounts values (default, 6, 'Retirement', 674536);
 insert into accounts values (default, 7, 'Checking', 100);
-
-

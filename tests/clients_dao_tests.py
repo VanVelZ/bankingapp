@@ -8,10 +8,10 @@ class ClientDAOTests(unittest.TestCase):
 
     client = Client("Test Client")
 
-    def test_00_insert(self):
+    def test_01_insert(self):
         self.assertEqual(ClientDAO.create_client(ClientDAOTests.client), True)
 
-    def test_01_get_all(self):
+    def test_02_get_all(self):
         clients = ClientDAO.get_all_clients()
         ClientDAOTests.client = clients.pop()
         self.assertTrue(clients)
